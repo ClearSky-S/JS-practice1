@@ -3,30 +3,23 @@ const main = function() {
     var ctx    = canvas.getContext("2d");
     var width  = canvas.width;
     var height = canvas.height;
+    const loadingText = document.getElementById("loadingText");
     // 중심점을 설정하고 그린다
     var xc = -0.6, yc = 0;
     draw();
     // 그리기 버튼을 클릭하면 그리기 시작
+
     document.getElementById("button").onclick = draw;
-    // Canvas 위의 마우스로 클릭한 지점을 중심 좌표로 설정한다
-    // document.getElementById("mycanvas").onclick = function(event) {
-    //     var ix = event.offsetX;
-    //     var iy = event.offsetY;
-    //     var mag  = parseFloat(document.getElementById("magnification").value);
-    //     xc += (2*ix/width - 1)/mag;
-    //     yc += (2*iy-height)/mag/width;
-    //     draw(); 
-    // };
-    // 설정에 따라 그리는 함수
     function draw() {
-        // 배율
-        var mag   = document.getElementById("magnification").value;
-        // 최대 반복 횟수
+        loadingText.textContent = "Loading...";
+        
+        var mag = document.getElementById("magnification").value;
         var maxit = document.getElementById("maxit").value;
-        // 중심 좌표를 표시
-        displayCenter(xc,yc);
-        // 망델브로 집합을 그린다
+
+        // takes long time
         mandelbrot(ctx,xc,yc,mag,maxit);
+
+        loadingText.textContent = "";
     }
 };
 // window.onload=main;
