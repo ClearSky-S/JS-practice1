@@ -5,20 +5,19 @@ const main = function() {
     var height = canvas.height;
     const loadingText = document.getElementById("loadingText");
     var xc = -0.6, yc = 0;
-    draw();
-
-    document.getElementById("button").onclick = draw;
     function draw() {
         loadingText.textContent = "Loading...";
-        
         var mag = document.getElementById("magnification").value;
         var maxit = document.getElementById("maxit").value;
 
         // takes long time
-        mandelbrot(ctx,xc,yc,mag,maxit);
-
-        loadingText.textContent = "";
+        ;
+        setTimeout(()=>mandelbrot(ctx,xc,yc,mag,maxit),50);
     }
+    draw();
+
+    document.getElementById("button").onclick = draw;
+
 };
 // window.onload=main;
 if (document.readyState !== "loading"){
@@ -63,6 +62,8 @@ function mandelbrot(c,xc,yc,mag,maxit) {
             c.fillRect(i,j,1,1);
         }
     }
+    loadingText.textContent = "";
+
 }
 
 
